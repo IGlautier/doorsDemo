@@ -1,0 +1,31 @@
+extends layout
+
+block content
+	div(class='container')
+		div(id='fix')
+			img(src='/images/layout.png')
+			div(id='b1', class='led')
+			div(id='b2', class='led')
+			div(id='b3', class='led')
+			div(id='b4', class='led')
+			div(id='b5', class='led')
+			div(id='b6', class='led')
+
+	script.
+		function switchDoor(doors) {
+			for(var i = 0; i < doors.length; i++) {
+				var d = i +1;
+				if(doors[i] == 1) $('#b'+d).css('background-color', 'green');
+				else $('#b'+d).css('background-color', 'red');
+			}
+		}
+		$( document ).ready(function() {
+			//switchDoor('b1');
+			setInterval(function() {
+					$.getJSON( "states", function( data ) {			
+						switchDoor(data);
+					})}
+					,3000);
+			
+		});
+		
